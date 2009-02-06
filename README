@@ -9,11 +9,7 @@ ReadBook は読書管理ツールです。
 から多大な影響を受けています。
 
 ==== ライセンス
-ReadBook に含まれる 全ての .rb ファイルは Ruby License です。
 You can redistribute it and/or modify it under the same terms as Ruby. 
-です。
-なんだこれ？とかこういう機能がほしい思われる箇所があればご自由に書き換えご使用ください。
-私の Mac と ruby と ruby 1.9.1 に関する知識不足からそういった箇所はたくさんあるかもしれません。
 
 === 必要なもの
 Mac OS X 10.5.x
@@ -65,7 +61,6 @@ raise "文字列\n"...　#この \nを削除し 'option_command.rb'側で改行�
 2009-01-17 : 
 readbook-01 公開
 
-==== 使い方ほか
 
 ======================
 0, ruby 1.9.1 のインストール
