@@ -1,6 +1,4 @@
 # readbook.rb
-# ruby 1.9.1p0 (2009-01-30 revision 21907) [i386-darwin9.6.0]
-# Copyright (c) 2009 midore
 # http://www.midore.net  <midorex@gmail.com>
 
 # You can redistribute it and/or modify it under the same terms as Ruby.

@@ -19,7 +19,6 @@ module ReadBook
         }
         set_ins(:@genru,"-")
         set_ins(:@memo,"-")
-        nil
       end
     end
 
@@ -76,6 +75,10 @@ module ReadBook
     end
 
     private
+
+    def m_def?(i)
+      self.class.method_defined? m
+    end
 
     def i_defined?(v)
       self.instance_variable_defined?(v)

@@ -1,5 +1,5 @@
 # README-UTF-8.txt
-# url: www.midore.net 
+# url: www.midore.net
 # mail: <midorex@gmail.com>
 # date: 2009-02-03.
 # ReadBook-0.3
@@ -325,7 +325,7 @@ ReadBook-0.3/mydata/ 以下にテキストファイルなどが保存されて�
 # フォルダごとバックアップ
 % cp -pR /pathto/ReadBook-xx/ /backup/ReadBook-xx-old/
 # データを新しいバージョンへコピー
-% cp -pR /pathto/ReadBook-xx/mydata/ /pathto/ReadBook-yy/
+% cp -pR /pathto/ReadBook-xx/mydata/ /pathto/ReadBook-yy/mydata/
 
 # 動作確認
 % cd /pathto/ReadBook-yy/bin
