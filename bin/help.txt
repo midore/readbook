@@ -1,0 +1,43 @@
+Usage: ./readbook-run.rb  [option] [EAN|ISBN|keyword|number]
+
+Option:
+  a	: get amazon data.
+  fadd	: get amazon data followed text file.
+  l	: list. sort adddate.
+  last	: list. sort enddate
+  r	: remove item.
+  u	: update item.
+  s	: search item with keyword.
+  f	: text search with keyword.
+  h	: help
+
+Example:
+  ./readbook-run.rb a 9784274066429	: get amazon data (ISBN:9784274066429).
+  ./readbook-run.rb fadd mylist.txt	: get amazon data followed mylist.txt.
+  ./readbook-run.rb l 3			: 3 items of lastest.
+  ./readbook-run.rb last 3		: 3 lastest items
+  ./readbook-run.rb s ruby		: items that include word "Ruby"
+  ./readbook-run.rb s +			: items that '--memo' is not empty.
+  ./readbook-run.rb f 読書		: text file search
+  ./readbook-run.rb r 9784274066429	: remove item that ISBN == 9784274066429 from list.
+  ./readbook-run.rb u 9784274066429	: update item that ISBN == 9784274066429 from list.
+  ./readbook-run.rb u all		: update All Items
+
+[setting]
+  aws-id,aws-key,counter
+  % vi ReadBook/bin/config
+  :aws_id=>'xxxx',            # your aws_id
+  :aws_key=>'xxxxxxxxxxxxx',  # your aws_key
+  :count_view=>10             # default counter
+
+  if you use emacs or vi
+  % vi ReadBook/lib/mod_txt.rb
+  # line 119. edit
+  # system("open #{path}")   # OS X TextEdit.app
+
+  setup
+  % /your/ruby19 readbook-setup.rb
+
+[About Ruby]
+  Ruby Lang      : http://www.ruby-lang.org/ja/
+
