@@ -1,0 +1,6 @@
+# Sample ISBN
+# % ruby19 readbook-run.rb fadd 'pathto/sample-isbnlist.txt'
+9784478004791
+9784274066429
+9784901491846
+
