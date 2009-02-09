@@ -50,8 +50,8 @@ module ReadBook
       begin
         ustr = @word.encode("UTF-8")
         return false unless ustr.valid_encoding?
-        qw = Regexp.quote(ustr)
-        rw = Regexp.new(qw, true)
+        w = Regexp.new(ustr, true)
+        return w
       rescue RegexpError
         return false
       end
@@ -71,10 +71,11 @@ module ReadBook
     private
 
     def chooseitem(ary)
+      # no = $stding.gets = select NO. from items.
       return ary[0] if ary.size == 1
       no = select_no(ary.size)
       raise "bye." unless no
-      return ary[no.to_i - 1]
+      return ary[no - 1]
     end
 
     def select_no(n)

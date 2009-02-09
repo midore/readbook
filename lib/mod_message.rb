@@ -18,22 +18,28 @@ module ReadBook
         return false if ans.size > 1
         return ans
       else        # return number
-        return false if ans.size > 1
+        # ignore zenkaku suji. 2009-02-09.
+        #ans = snumtonum(ans)
+        i_ans = ans.to_i
+        return false if i_ans > opt
         return false if ans == "0"
         return false if ans =~ /\D/
-        ans = snumtonum(ans)
         return false unless ans
-        return false if ans > opt.to_i # Max Numbera
-        return ans
+        return ans.to_i
       end
     end
 
-    def snumtonum(str)
-      #ref: 'Ruby Way' SecondEdition P122.
-      ary = (65296..65305).to_a
-      c = str.codepoints.to_a[0]
-      (c > 128) ? ary.index(c): str.to_i
-    end
+    #def snumtonum(str)
+      # pending... this methods useful????
+      # zenkaku suji exchange to hankaku suji.
+      # opt is max number 
+      # return codopoint of hankakusuji, if max number < exchanged_number
+      # 
+      # maxnumber_codeponts = 
+      # ary = (65296..maxnumber_codeponts).to_a
+      # p c = str.ord
+      # (c > 128) ? ary.index(c): str.to_i
+    #end
 
   end
 

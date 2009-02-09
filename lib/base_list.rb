@@ -34,7 +34,8 @@ module ReadBook
 
     def find_word(w)
       return nil unless w
-      ary = @list.values.find_all{|v| w.match(v.str_values)
+      ary = @list.values.find_all{|v|
+        w.match(v.str_values)
       }.sort_by{|x| x.enddate.to_s}.reverse
     end
 

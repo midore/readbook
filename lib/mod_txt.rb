@@ -87,7 +87,7 @@ module ReadBook
         def set_path
           ext = @item.title.gsub(/\(.*?\)|\s|\.|:|;|#|%|&|$|@|!/u,'').gsub(/\//,'_')
           path = File.join(dir_text, @item.ean.to_s + "-" + ext + '.txt')
-          path.force_encoding("UTF8-MAC") unless ext.ascii_only?
+          #path.force_encoding("UTF8-MAC") unless ext.ascii_only?
           return path
         end
 
