@@ -14,8 +14,6 @@ module ReadBook
       rescue Exception => err
         print err.message, "\n"
         abort "abort. bye.\n"
-      ensure
-        exit(1)
       end
     end
 
