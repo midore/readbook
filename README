@@ -1,131 +1,58 @@
-# README-UTF-8.txt
-# url: www.midore.net
-# mail: <midorex@gmail.com>
-# date: 2009-02-03.
-# ReadBook-0.3
+readbook
 
-ReadBook は読書管理ツールです。
-「 読書は1冊のノートにまとめなさい 100円ノートで確実に頭に落とすインストール・リーディング 」／ 奥野宣之　／ISBN 9784901491846
-から多大な影響を受けています。
-
-==== ライセンス
+# License
 You can redistribute it and/or modify it under the same terms as Ruby. 
 
-=== 必要なもの
+# dependency
 Mac OS X 10.5.x
-ruby 1.9.1　のインストール
-テキストエディタの環境設定の変更 => 標準テキスト、オプションなし、.txt を追加、UTF-8 で開く、UTF-8 で保存
-# テキストエディタ使ってない人（emacs など）は不要＆カスタマイズ必要(lib/mod_txt.rb のline 116.)。
-# エディタ側も  読み書きにUTF-8使用の必要あり。
-環境変数LANGの確認=> ja_JP.UTF-8
+ruby 1.9.1
 
-==== 履歴
-2009-02-07:
-github.com
+# about this project
+management reading 
+only japanese amazon.co.jp
 
-2009-02-03:
-readbook-0.3 公開
-変更した主なファイル
-load bin/config
-lib/mod_conf
-lib/mod_txt
-lib/item_search
-lib/base_item
-
-・author, creator の記載がない（例えば雑誌など）場合、生成されるテキストファイルから author 欄 creator欄をもうけないようにした。
-・テキストを対象に検索する場合の速度をあげた（効率の悪い書き方を改めた）
-・検索（ % ./readbook-run.rb s keyword | % ./readbook-run.rb f keyword）後のオプション選択時にあやまって日本語の数字を（１、３など）を入力しても 1,3 と受け止めエラーにならないためのメソッドの内容を変更した。
-・marshal としてファイルに保存する際のメソッドを変更した（要検討:個人用途を前提としファイルロックなどははずした。lib/mod_list.rb）
-・このファイルに 10) ReadBookバージョンアップ方法 を追加した。
-・このファイル冒頭の日付の間違いを修正した。
-・% ./readbook-run.rb f keyword　で検索する時、大文字小文字の区別をなくした。
-
-・ruby 1.9.1p0 が公開されました! (2009/1/31)。Ruby を作っている方々に感謝！
-さっそく、ruby 1.9.1p0 (2009-01-30 revision 21907) [i386-darwin9.6.0]で動くことを確認。
-
-2009-01-18: 
-readbook-0.2 公開
-レイアウトの変更
-ReadBook-0.2/bin
-bin/config
-ReadBook-0.2/lib
-ReadBook-0.2/doc
-
-レイアウト修正と同時に この README-UTF8.txt の修正。
-lib/mod_txt.rb の修正。
-日本語を含むファイル名については、force_encoding("UTF8-MAC") する。
-その他、 
-無用なチェック機能を削除
-raise "文字列\n"...　#この \nを削除し 'option_command.rb'側で改行を表示
- 
-2009-01-17 : 
-readbook-01 公開
-
-
+readbook は読書管理ツールです。
 ======================
-0, ruby 1.9.1 のインストール
+0, ruby 1.9.1
 ======================
 Ruby Lang　: http://www.ruby-lang.org/ja/
-
 ======================
-1, 環境変数の確認
+1, environment
 ======================
 % env | grep LANG
 LANG=ja_JP.UTF-8
-
-LANG=ja_JP.UTF-8 になっていることを確認。UTF-8 でない場合は動きません。
-# OS X 10.5.x のデフォルトLANG は UTF-8 です。なにもさわっていなければ UTF-8 のはずです。
-
 ======================
-2, テキストエディット.app の環境設定
+2, TextEdit.app
 ======================
-（テキストエディット.app を使わない場合は不要。参照: 3, カスタマイズ）
-＜新規書類＞
-標準テキストにチェック
-文字種を変更しない。サイズのみ変更。
-オプションのチェックをすべてはずす
-＜開く／保存＞
-HTML...テキストコマンドを無視にチェック
-RTF...テキストコマンドを無視にチェック
-自動バックアップファイルを削除にチェック
-標準テキストファイルに拡張子.txt追加にチェック
-変更書類の自動保存：「しない」を選択
-ファイルを開くとき：Unicode (UTF-8)
-ファイルを保存するとき：Unicode (UTF-8)
-余白を維持のチェックをはずす
-
-注：設定後、テキストエディットを終了する必要あり。
-# 元の設定に戻したいときは　環境設定->新規書類->すべてをデフォルトに戻す->テキストエディットを終了
-
+format: standard text
+open: UTF-8
+save: UTF-8
+ignore: HTML, RTF
+auto save: no
+extension: add .txt
 ======================
-3, カスタマイズ
+3, customize
 ======================
-ReadBook-0.3 をダウンロードしたら適当な場所に配置してください。
-
-・表示される行数の設定
 % vi ReadBook-0.3/bin/config
-  :count_view=>10　# <-ここの数字を書き換える
+  :count_view=>10　# <-edit number.
 
-・使用する　aws_key, or aws_id　を変更する
 % vi ReadBook-0.3/bin/config
-  :aws_id=>'xxxx',           # <- あなたのid
-  :aws_key=>'xxxxxxxxxxxxx', # <- あなたのキー
+  :aws_id=>'xxxx',           # <- your amazon associate id
+  :aws_key=>'xxxxxxxxxxxxx', # <- your amazon web service key
 
-・テキストエディットではなく emacs や vi を使う
+# use emacs or vi
 % vi ReadBook-0.3/lib/mod_txt.rb
-  line 119.
-  system("open #{path}")   # OS X TextEdit.app
-  ここを自由にかきかえる。
+  # edit line 119.
+  #system("open #{path}")   # OS X TextEdit.app
+   system("emacs #{path})
 
 ======================
-4, データディレクトリの作成
+4, make data directory
 ======================
-% cd ReadBook-0.3/bin
-% /your/ruby191 readbook-setup.rb
+% cd readbook-xx/bin
+% ruby191 readbook-setup.rb
 
-# /your/ruby191 はあなたがインストールした Ruby 1.9.1 へのパスです。
-# 実行すると
-
+=>
 Check DataDirectory
 OK: /path/to/ReadBook-0.3
 Maked directory : /path/to/ReadBook-0.3/mydata
@@ -136,115 +63,50 @@ Maked directory : /path/to/ReadBook-0.3/mydata/data
 [true, "/path/to/ReadBook-0.3/mydata/text"]
 [true, "/path/to/ReadBook-0.3/mydata/data"]
 
-のようなメッセージが表示されます。全行が OK or true になっているのを確認するとともに
-ReadBook-0.3/mydata
-ディレクトリが作成されているのを確認してください。
-
+% ls -l readbook-xx/mydata
 ======================
-5, ヘルプの実行
+5, run help
 ======================
-% cd ReadBook-0.3/bin
-% /your/ruby191 readbook-run.rb h
-
-# /your/ruby191 はあなたがインストールした Ruby 1.9.1 へのパスです。
-
+% cd readbook-xx/bin
+% ruby191 readbook-run.rb h
 ======================
-6, エイリアス
+6, alias
 ======================
-エイリアス mybook の作成
---
-% cp /path/to/ReadBook-0.3/bin/readbook-run.rb /home/yourdir/readbook-run.rb
-% chmod +x /home/yourdir/readbook-run.rb
+% cp /pathto/readbook-xx/bin/readbook-run.rb /home/dir/readbook-run.rb
+% chmod +x /home/dir/readbook-run.rb
 
-% vi /home/yourdir/readbook-run.rb
-#!/your/ruby191 -w
-1行目に ruby 1.9.1 へのパスをつけくわえる。2行目になる # coding: utf-8　はそのままに。
-/your/ruby191 はあなたがインストールした Ruby 1.9.1 へのパスです。
+# add shebang line 1. and edit
+% vi /home/dir/readbook-run.rb
+#!/pathto/ruby191 -w
+# coding: utf-8
 
 $LOAD_PATH.delete(".")
 # $LOAD_PATH.unshift File.dirname(File.dirname(File.expand_path($PROGRAM_NAME)))
-この行を下記に書き換える。
-$LOAD_PATH.push('/path/to/ReadBook-0.3/')
+$LOAD_PATH.push('/pathto/readbook-xx/')
+
+save file /home/dir/readbook-run.rb
 
 --
-# ログインファイルの編集
-% vi ~/.bashrc  or .bash_profile
+
+# edit .bashrc or .bash_profile
+% vi ~/.bashrc
 alias 'mybook'='/home/yourdir/readbook-run.rb'
 
-# 再読み込み
 % source .bashrc
 
-# ヘルプの実行
 % mybook h
 
-# エイリアス mybook を作成しない場合
-ReadBook-0.3/bin/readbook-run.rb　ファイルの１行目に
-#!/your/ruby191
-
-を記入し実行権限を与える。
+# if not make alias
+% cd readbook-xx/bin 
+add shebung line 1 : readbook-xx/bin/readbook-run.rb
 % chmod +x ReadBook-0.3/bin/readbook-run.rb
-
-# ヘルプの実行
-% cd ReadBook-0.3/bin
 % ./readbook-run.rb help
+% ./readbook-run.rb h
 
 ======================
-7, つかいかた
+7, usage
 ======================
-
-注意：
-% mybook は 
-% ./readbook-run.rb
-と同等です。
-
-1) 本を登録
-% mybook a 978xxxxxxxxxx
-or
-~/Desktop/mylist.txt に ISBN を一行づつ記入しておいて 
-% mybook fadd ~/Desktop/mylist.txt　でまとめて登録。
-
-2) 一覧表示
-% mybook l
-1.	[ Book][         -][-][                -]	読書は1冊のノートにまとめなさい 100円ノートで確実に頭に落とすインストール・リーディング | 奥野宣之
-2.	[ Book][         -][-][                -]	プログラミングRuby 第2版 言語編 | Dave Thomas / Chad Fowler / Andy Hunt (田和 勝 / まつもと ゆきひろ)
-3.	[ Book][         -][-][                -]	アップルを創った怪物―もうひとりの創業者、ウォズニアック自伝 | スティーブ・ウォズニアック (井口 耕二)
-----
-3 items
-# 左から 表示番号, [group][読了日][メモや感想の有無][ジャンル] タイトル｜著者や訳者名
-
-3) 数日後「アップルを創った怪物」を読み終えたら
-% mybook s アップル
-or
-% mybook s 2009
-などで検索。
-候補が1つだけの時はいきなりオプションを聞いてくるので（複数の時は番号を選択後）小文字オーを入力してエンターキーを押すと、テキストエディット.app が起動し登録時に自動保存したテキストファイルが開く。読了日やジャンルや感想などを入力し保存。テキスト編集後にアップデートすると読了一覧表に反映される。
-# オプションの種類
-# c 詳細表示
-# o テキストファイルオープン
-# u アップデート
-# r 削除
-
-4) 一括アップデート
-% mybook u all
-# 個別にアップデートしたい時は検索後オプションで u を選ぶ。
-
-5) 読了一覧
-% mybook last
-1.	[ Book][2009-01-03][+][   Computer,Apple]	アップルを創った怪物―もうひとりの創業者、ウォズニアック自伝 | スティーブ・ウォズニアック (井口 耕二)
-----
-1 items
-
-# last は読了したものだけを 読了日昇順に。
-# l (小文字のエル) は登録しているものすべて（conf で設定した行数分だけ）を登録した昇順に。
-
-6) 数日後or何ヶ月後 テキストファイルから「あの単語」を検索したくなったら、
-% mybook f あの単語
-
-s で検索した場合と同様に番号を選択するとオプションを聞いてくるのでオプションを選択する。キャンセルは n or リターンキー
-# s での検索はタイトルや著者名やジャンルなどを対象にしている。f は一覧表において + - で表示されているメモ欄の内容を対象に検索をかける。
-
-7) テキストファイルについて
-はじめて本を登録すると、
+1) add japanese book 
 % mybook a 9784274066436
 # =>
 hello, readbook.
@@ -252,13 +114,51 @@ hello, readbook.
 : Added Item.
 プログラミングRuby 第2版 ライブラリ編
 
-上記のメッセージが表示されると同時にテキストエディットが起動し本のタイトルや著者名が記入されたファイルが開きます。
-自動生成されるテキストファイルの保存場所
-=>
-ReadBook-0.3/mydata/text/9784274066436-プログラミングRuby第2版ライブラリ編.txt
-注意：テキストファイルのファイル名を変更すると一覧表とテキストファイルとの関係性がとだえアップデートできなくなります。
+% cat ~/Desktop/mylist.txt
+# 2009.02
+# isbn no list
+978....
+978....
+978....
 
-ファイルの内容
+% mybook fadd ~/Desktop/mylist.txt
+# items added
+
+2) list show
+% mybook l
+1.	[ Book][         -][-][                -]	読書は1冊のノートにまとめなさい 100円ノートで確実に頭に落とすインストール・リーディング | 奥野宣之
+2.	[ Book][         -][-][                -]	プログラミングRuby 第2版 言語編 | Dave Thomas / Chad Fowler / Andy Hunt (田和 勝 / まつもと ゆきひろ)
+3.	[ Book][         -][-][                -]	アップルを創った怪物―もうひとりの創業者、ウォズニアック自伝 | スティーブ・ウォズニアック (井口 耕二)
+----
+3 items
+
+NO, [groupname][date,read a book to the end][memo,exisit?][genru] book title | author (creator)
+
+3) search book 
+% mybook s Apple
+or
+% mybook s 2009
+
+Option
+c : detail of item
+o : text file open of item
+u : item update
+r : item remove
+
+4) update
+% mybook u all
+
+5) list of book that read to the end
+% mybook last
+1.	[ Book][2009-01-03][+][   Computer,Apple]	アップルを創った怪物―もうひとりの創業者、ウォズニアック自伝 | スティーブ・ウォズニアック (井口 耕二)
+----
+1 items
+
+6) text search 
+% mybook f keyword
+
+7) about text file
+
 --ean
 9784274066436
 --title
@@ -276,61 +176,25 @@ Dave Thomas / Chad Fowler / Andy Hunt
 --memo
 -
 
-7) テキストファイル編集の際の注意
---title
---author
---creator
---publisher
-これらの行およびその内容は不要な場合消去してもなんら問題ありませんが、
+8) dayly use
+a [ISBN]	# item add 
+l		# list show
+s [keyword]	# search book
+u all   	# all items update
+last		# latest item 
+f [keyword]	# text search
+h		# help
 
---ean
---enddate
---genru
---memo
-上記４つの行を変更したり削除してしまうと読了一覧表にデータが反映されなくなります。
+9) back up and version up
+% cp -pR /pathto/readbook-xx/ /backup/readbook-xx-old/
+% cp -pR /pathto/readbook-xx/mydata/ /pathto/readbook-yy/mydata/
 
---ean		<= この「ハイフン二つと文字列」を変更すると正しくアップデートできなくなります。
-9784274066436	<= この番号を変更してしまうと一覧表とテキストファイルとの関係性がとだえアップデートできなくなります。
---enddate
-ここに読了日を入力してください。日付以外の文字列も受け付けます。ただし表示数に限界があります。
-日本語を入力すると一覧表のフォームがくずれます。できるだけ半角数字を入れてください。
---genru
-ここにジャンル名を入力してください。半角カンマで区切りになります。SF,fantasy など。ただし一覧表での表示文字数は限られています。
---memo
-ここに感想やメモや引用文を入力しアップデート（% mybook u all）すると一覧表のメモ欄は [+] になります。
-
-8) 使いかたまとめ
-購入したタイミングで本の登録( mybook a ISBN )を行っておきます。読書中は手書きメモなどを残しつつ
-（参考： 読書は1冊のノートにまとめなさい 100円ノートで確実に頭に落とすインストール・リーディング ISBN 9784901491846）
-読了したタイミングで --memo (感想や引用)と --enddate(読了日) --genru(ジャンル) を入力しアップデートします。
-読了後は一覧表を閲覧したりテキスト検索したり... といった使い方です。
-
-a [ISBN]	# アイテム追加
-l		# 全てのアイテムの一覧表
-s [keyword]	# 検索
-u all   	# 一括アップデート
-last		# 読了日が入力されたアイテムの一覧表
-f [keyword]	# テキスト検索
-h		# ヘルプ
-
-# 検索後のオプション選択で r を選択した場合一覧表からはそのアイテムがなくなりますがテキストファイル自体は削除されません。
-
-9) バックアップ
-ReadBook-0.3/mydata/ 以下にテキストファイルなどが保存されています。必ずバックアップをおとりください。
-
-10) ReadBookバージョンアップ方法
-今使っている ReadBook-xx をフォルダごとバックアップしてください。
-ダウンロードしたあたらしい ReadBook-yy フォルダに ReadBook-xx/mydata/ をフォルダごと格納してください。
-
-# フォルダごとバックアップ
-% cp -pR /pathto/ReadBook-xx/ /backup/ReadBook-xx-old/
-# データを新しいバージョンへコピー
-% cp -pR /pathto/ReadBook-xx/mydata/ /pathto/ReadBook-yy/mydata/
-
-# 動作確認
-% cd /pathto/ReadBook-yy/bin
-# ヘルプを実行してバージョン番号を確認
+% cd /pathto/readbook-yy/bin
 % ruby1.9.1 readbook-run.rb h
-# アイテム一覧表の表示
 % ruby1.9.1 readbook-run.rb l
+
+++++
+
+「 読書は1冊のノートにまとめなさい 100円ノートで確実に頭に落とすインストール・リーディング 」／ 奥野宣之　／ISBN 9784901491846
+から多大な影響を受けています。
 
