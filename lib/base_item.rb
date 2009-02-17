@@ -66,7 +66,8 @@ module ReadBook
       @enddate = '-' unless @enddate
       @enddate = @enddate.to_s[0..9]
       @genru = @genru[0..15]
-      printf "\t[%005s][%010s][%s][%016s]\s\s%s\s|\s%s\n", @productgroup,@enddate,@memo,@genru,@title,au
+      ary = [@productgroup,@enddate,@memo,@genru,@title,au]
+      printf "\t[%-5s][%-010s][%s][%-016s]\s\s%s\s|\s%s\n" % ary
     end
 
     def to_s_as
@@ -129,7 +130,7 @@ module ReadBook
 
     def ary_txt
       ary = [:@ean,:@title,:@author,:@creator,:@publisher,:@enddate, :@genru,:@memo]
-      ary.delete(:@creator) unless i_defined?(:@author)
+      ary.delete(:@author) unless i_defined?(:@author)
       ary.delete(:@creator) unless i_defined?(:@creator)
       return ary
     end

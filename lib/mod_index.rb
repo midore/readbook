@@ -10,17 +10,14 @@ module ReadBook
 
     def to_h
       files = Hash.new
-      Proc.new do |dir,ext|
-        Find.find(dir){|path|
-          Find.prune if path =~ /trash/
-          if FileTest.file?(path) and File.extname(path) == ext
-            display_name = File.basename(path).gsub(File.extname(path), '')
-            display_name.to_i
-            files[display_name.to_i] = path
-          end
+      Proc.new{|dir,ext|
+        Dir.foreach(dir){|x|
+          n = File.basename(x).to_i
+          fullpath = File.join(dir, x)
+          files[n] = fullpath if /^[0-9]{13}\-(.*?).txt$/ =~ x
         }
         files
-      end
+      }
     end
 
     def indexfiles(dir)
