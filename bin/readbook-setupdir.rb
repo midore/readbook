@@ -1,5 +1,5 @@
 # coding: utf-8
-# 2009-02-03
+# 2009-02-23
 
 #===================================================
 # ReadBook/mydata/text => for text file.
@@ -22,12 +22,8 @@ begin
   print "Your environment\n #{e} \nYour default_external\n#{ext}\n\n"
   print "Check DataDirectory\n"
   ReadBook::MineSetup::CheckVAndPath.data_dir_check
-
 rescue RuntimeError => err
   print err.message, "\n"
-rescue Exception => err
-  print err.message, "\n"
-  abort "abort. bye.\n"
 ensure
   exit(1)
 end

@@ -53,7 +53,7 @@ module ReadBook
         w = Regexp.new(ustr, true)
         return w
       rescue RegexpError
-        return false
+        return nil
       end
     end
 
@@ -64,7 +64,7 @@ module ReadBook
     def base_continue(ary)
       @item = chooseitem(ary)
       ans = select_con
-      raise "bye." unless ans
+      raise "stopped search." unless ans
       SearchOption.option(@item, ans)
     end
 
@@ -74,7 +74,7 @@ module ReadBook
       # no = $stding.gets = select NO. from items.
       return ary[0] if ary.size == 1
       no = select_no(ary.size)
-      raise "bye." unless no
+      raise "stopped select item." unless no
       return ary[no - 1]
     end
 

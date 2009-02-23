@@ -7,14 +7,7 @@ module ReadBook
   class Starter
 
     def Starter.start
-      begin
-        OptionCommand.caseopt
-      rescue RuntimeError => err
-        print err.message, "\n"
-      rescue Exception => err
-        print err.message, "\n"
-        abort "abort. bye.\n"
-      end
+      OptionCommand.caseopt
     end
 
   end
@@ -26,10 +19,10 @@ module ReadBook
   class OptionCommand
 
     def self.caseopt
-      return print "bye.\n" if ARGV.empty?
+      return print "see: help.\n" if ARGV.empty?
       com,opt1,opt2,opt3 = ARGV
       s = ARGV.size
-      raise "bye." if s > 4
+      raise "see: help." if s > 4
       case s
       when 1
         group_1(com)
@@ -38,7 +31,7 @@ module ReadBook
       when 3
         group_3(com, opt1, opt2)
       else
-        raise "bye.\n"
+        raise "see: help.\n"
       end
     end
 
@@ -54,7 +47,7 @@ module ReadBook
       when /^last$/
         ItemShow.new.base_last
       else
-        raise "bye."
+        raise "see: help."
       end
     end
 

@@ -19,7 +19,6 @@ module ReadBook
         return ans
       else        # return number
         # ignore zenkaku suji. 2009-02-09.
-        #ans = snumtonum(ans)
         i_ans = ans.to_i
         return false if i_ans > opt
         return false if ans == "0"
@@ -28,18 +27,6 @@ module ReadBook
         return ans.to_i
       end
     end
-
-    #def snumtonum(str)
-      # pending... this methods useful????
-      # zenkaku suji exchange to hankaku suji.
-      # opt is max number 
-      # return codopoint of hankakusuji, if max number < exchanged_number
-      # 
-      # maxnumber_codeponts = 
-      # ary = (65296..maxnumber_codeponts).to_a
-      # p c = str.ord
-      # (c > 128) ? ary.index(c): str.to_i
-    #end
 
   end
 

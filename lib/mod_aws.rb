@@ -163,11 +163,9 @@ module ReadBook
             response = http.get(@request)
             res = response.body
           }
-          raise "Error: AWS access." unless res
+        raise "Error: AWS access." unless res
         rescue SocketError
           return 'socket'
-        rescue Exception =>error
-          return error
         end
         return res
       end

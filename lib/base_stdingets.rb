@@ -5,19 +5,19 @@ module ReadBook
   # reference: http://doc.loveruby.net/refm/api/view/class/Timeout
   ######################
 
-  class MyError < Exception; end
-
   class StdinGets
 
     include BaseMessage
 
     def message(str, opt)
+      sec = 7
       ans = ''
       begin
-        timeout(9, MyError){ans = interactive(str, opt)}
-      rescue MyError => err
-        print "Timeout...bye.\n"
-        return false
+        timeout(sec){ans = interactive(str, opt)}
+      rescue RuntimeError
+        raise "Timeout. #{sec}sec...bye"
+      rescue SignalException
+        raise "\n"
       end
       return ans
     end

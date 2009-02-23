@@ -12,9 +12,8 @@ module ReadBook
         def helptext
           @path = filehelp
           raise "Error: Help File" unless @path
-          doc = read_file
-          raise "Error: can't read HelpFile" unless doc
-          print doc
+          raise "Error: can't read HelpFile" unless get_check_file?
+          print read_file
         end
 
         def get_textpath(ean) # ItemAdd,SearchOption
@@ -34,6 +33,7 @@ module ReadBook
 
         def get_textitem(ean) # ItemUpdate
           @path =  get_textpath(ean)
+          return nil unless @path
           data = get_textdata
           h = TextItem::TextToH.setup(data)
         end
@@ -49,7 +49,6 @@ module ReadBook
         private
 
         def get_textdata
-          raise "Error: not exist text file" unless @path
           raise "Error: can't read file" unless get_check_file?
           return read_file
         end
@@ -57,6 +56,7 @@ module ReadBook
         def get_check_file?
           return nil unless FileTest.readable?(@path)
           return nil if File.executable?(@path)
+          return true if File.split(@path)[1] == "help.txt"
           return nil unless File.extname(@path) =~ /^\.txt$/
           m = /^[1-9].*?\.txt$/.match(File.split(@path)[1])
           return nil unless m
@@ -115,10 +115,7 @@ module ReadBook
 
       def self.openmyfile(path)
         raise "Error: open file" unless check_open?(path)
-        begin
-          system("open #{path}")   # OS X TextEdit.app
-        rescue Exception => err
-        end
+        system("open #{path}")   # OS X TextEdit.app
       end
 
       def self.check_open?(path)

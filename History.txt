@@ -1,0 +1,55 @@
+2009-02-23:
+version-0.3.2
+・EAN 12 桁の場合テキストファイルをみつけられなかった点を修正。 mod_index.rb
+・rescue Exception を削除。 rescue SignalException にした mod_stdingets.rb
+・rescue Exception を削除 mod_aws.rb
+・テキストファイルが存在しない場合の処理 item_update.rb, mod_txt.rb
+・テキストファイルを開く場合、begin ですべてのエラーを捕獲しないようにした。mod_txt.rb
+
+2009-02-18:
+version-0.3.1
+
+2009-02-11:
+
+2009-02-06: 
+github.com
+
+2009-02-03:
+readbook-0.3 公開（www.midore.net）
+変更した主なファイル
+load bin/config
+lib/mod_conf
+lib/mod_txt
+lib/item_search
+lib/base_item
+
+・author, creator の記載がない（例えば雑誌など）場合、生成されるテキストファイルから author 欄 creator欄をもうけないようにした。
+・テキストを対象に検索する場合の速度をあげた（効率の悪い書き方を改めた）
+・検索（ % ./readbook-run.rb s keyword | % ./readbook-run.rb f keyword）後のオプション選択時にあやまって日本語の数字を（１、３など）を入力しても 1,
+3 と受け止めエラーにならないためのメソッドの内容を変更した。
+・marshal としてファイルに保存する際のメソッドを変更した（要検討:個人用途を前提としファイルロックなどははずした。lib/mod_list.rb）
+・このファイルに 10) ReadBookバージョンアップ方法 を追加した。
+・このファイル冒頭の日付の間違いを修正した。
+・% ./readbook-run.rb f keyword　で検索する時、大文字小文字の区別をなくした。
+
+・ruby 1.9.1p0 が公開されました! (2009/1/31)。Ruby を作っている方々に感謝！
+さっそく、ruby 1.9.1p0 (2009-01-30 revision 21907) [i386-darwin9.6.0]で動くことを確認。
+
+2009-01-18: 
+readbook-0.2 公開
+レイアウトの変更
+ReadBook-0.2/bin
+bin/config
+ReadBook-0.2/lib
+ReadBook-0.2/doc
+
+レイアウト修正と同時に この README-UTF8.txt の修正。
+lib/mod_txt.rb の修正。
+日本語を含むファイル名については、force_encoding("UTF8-MAC") する。
+その他、 無用なチェック機能を削除
+raise "文字列\n"...　#この \nを削除し 'option_command.rb'側で改行を表示
+
+2009-01-17 : 
+readbook-01 公開（www.midore.net）
+
+

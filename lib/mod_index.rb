@@ -14,7 +14,7 @@ module ReadBook
         Dir.foreach(dir){|x|
           n = File.basename(x).to_i
           fullpath = File.join(dir, x)
-          files[n] = fullpath if /^[0-9]{13}\-(.*?).txt$/ =~ x
+          files[n] = fullpath if /^[0-9]{11}..?\-(.*?).txt$/ =~ x
         }
         files
       }

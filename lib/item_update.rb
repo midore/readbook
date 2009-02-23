@@ -36,7 +36,11 @@ module ReadBook
     def check_item
       @gt = get_txt_data
       @gl = get_list_data
-      return true unless @gt or @gl
+      return true unless @gl
+      unless @gt
+        print "Not found text file: #{@item.title}\n"
+        return true
+      end
       @gl.eql?(@gt)
     end
 
