@@ -16,8 +16,8 @@ module ReadBook
       :dir_text =>'text',
       :dir_subject =>'data',
       :file_subject =>'items.obj',
-      :aws_id=>'midore-22',
-      :aws_key=>'0Z6KGH49MFQJQTSPGDG2',
+      :aws_id=>'xxxxx',
+      :aws_key=>'xxxxxxxx',
       :count_view=>7
       )
     end
