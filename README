@@ -1,8 +1,5 @@
 readbook
 
-# License
-You can redistribute it and/or modify it under the same terms as Ruby. 
-
 # dependency
 Mac OS X 10.5.x
 ruby 1.9.1
@@ -15,7 +12,6 @@ readbook は読書管理ツールです。
 
 # author
 midorex@gmail.com
-www.midore.net
 
 ======================
 0, ruby 1.9.1
