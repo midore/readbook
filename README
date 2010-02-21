@@ -12,8 +12,8 @@ readbook は読書管理ツールです。
 追記: 2009年8月以降 Amazon AWS の仕様変更に伴いこのプログラムは動かなくなりました。 2010.02.20
 
 # Licence
- Copyright (C) 2009 midore
- readbook is licensed under the GPLv2
+Copyright (C) 2009 midore
+readbook is licensed under the GPLv2
 
 ======================
 0, ruby 1.9.1
