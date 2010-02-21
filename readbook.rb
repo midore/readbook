@@ -1,7 +1,4 @@
 # readbook.rb
-# http://www.midore.net  <midorex@gmail.com>
-
-# You can redistribute it and/or modify it under the same terms as Ruby.
 
 require 'uri'
 require 'net/http'
